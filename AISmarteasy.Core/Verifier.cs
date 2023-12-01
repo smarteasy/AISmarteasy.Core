@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using Microsoft.VisualBasic;
 
 namespace AISmarteasy.Core;
 
@@ -9,6 +10,17 @@ public static class Verifier
 {
     private static readonly Regex AsciiLettersDigitsUnderscoresRegex = new("^[0-9A-Za-z_]*$");
 
+    public static bool CanBePromptTemplate(string text)
+    {
+        var testText = text.Trim();
+        return text.Contains("{{") && text.Contains("}}");
+    }
+
+
+
+
+
+    
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void NotNull([NotNull] object? obj, [CallerArgumentExpression("obj")] string? paramName = null)
     {

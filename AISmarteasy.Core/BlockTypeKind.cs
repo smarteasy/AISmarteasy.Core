@@ -5,8 +5,8 @@ public enum BlockTypeKind
     Undefined,
     Text,
     PlaceHolder,
+    FunctionId,
     Variable,
     Value,
-    FunctionId,
     NamedArg,
 }
