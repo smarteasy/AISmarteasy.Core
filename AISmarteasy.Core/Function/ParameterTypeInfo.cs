@@ -1,20 +1,20 @@
 ﻿namespace AISmarteasy.Core;
 
-public class ParameterViewType : IEquatable<ParameterViewType>
+public class ParameterTypeInfo : IEquatable<ParameterTypeInfo>
 {
     private readonly string _name;
 
-    public static readonly ParameterViewType String = new("string");
+    public static readonly ParameterTypeInfo String = new("string");
 
-    public static readonly ParameterViewType Number = new("number");
+    public static readonly ParameterTypeInfo Number = new("number");
 
-    public static readonly ParameterViewType Object = new("object");
+    public static readonly ParameterTypeInfo Object = new("object");
 
-    public static readonly ParameterViewType Array = new("array");
+    public static readonly ParameterTypeInfo Array = new("array");
 
-    public static readonly ParameterViewType Boolean = new("boolean");
+    public static readonly ParameterTypeInfo Boolean = new("boolean");
 
-    public ParameterViewType(string name)
+    public ParameterTypeInfo(string name)
     {
         Verifier.NotNullOrWhitespace(name, nameof(name));
 
@@ -25,7 +25,7 @@ public class ParameterViewType : IEquatable<ParameterViewType>
 
     public override string ToString() => _name;
 
-    public bool Equals(ParameterViewType? other)
+    public bool Equals(ParameterTypeInfo? other)
     {
         if (other is null)
         {
@@ -37,7 +37,7 @@ public class ParameterViewType : IEquatable<ParameterViewType>
 
     public override bool Equals(object? obj)
     {
-        return obj is ParameterViewType other && Equals(other);
+        return obj is ParameterTypeInfo other && Equals(other);
     }
 
     public override int GetHashCode()

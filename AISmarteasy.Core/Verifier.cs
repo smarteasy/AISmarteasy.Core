@@ -77,13 +77,11 @@ public static class Verifier
         }
     }
 
-    public static void ValidFunctionName([NotNull] string? functionName) =>
-        ValidName(functionName, "function name");
+    public static void ValidFunctionName([NotNull] string? functionName) => ValidName(functionName, "function name");
 
-    public static void ValidFunctionParamName([NotNull] string? functionParamName) =>
-        ValidName(functionParamName, "function parameter name");
+    public static void ValidParameterName([NotNull] string? parameterName) => ValidName(parameterName, "function parameter name");
 
-    public static void ParametersUniqueness(IList<ParameterView> parameters)
+    public static void ParametersUniqueness(IList<ParameterInfo> parameters)
     {
         int count = parameters.Count;
         if (count > 0)
@@ -91,7 +89,7 @@ public static class Verifier
             var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             for (int i = 0; i < count; i++)
             {
-                ParameterView parameterView = parameters[i];
+                ParameterInfo parameterView = parameters[i];
                 if (string.IsNullOrWhiteSpace(parameterView.Name))
                 {
                     string paramName = $"{nameof(parameters)}[{i}].{parameterView.Name}";

@@ -2,5 +2,5 @@
 
 public interface IPlugin
 {
-    IFunction GetFunction(string name);
+    IPluginFunction GetFunction(string name);
 }

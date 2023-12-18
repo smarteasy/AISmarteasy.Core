@@ -6,5 +6,8 @@ public interface IBlock
     string Content { get; }
 
     string Render(ContextVariableDictionary? variables);
+
+    Task<string> RenderAsync(ContextVariableDictionary variables, bool isNeedFunctionRun, CancellationToken cancellationToken = default);
+    
     bool IsValid(out string errorMsg);
 }
