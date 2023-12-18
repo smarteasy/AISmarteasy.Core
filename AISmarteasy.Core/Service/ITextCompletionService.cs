@@ -2,7 +2,7 @@
 
 public interface ITextCompletionService : ILLMService
 {
-    Task<string> RunAsync(string prompt, LLMServiceSetting requestSettings, CancellationToken cancellationToken = default);
+    Task<string> RunAsync(string prompt, LLMServiceSetting serviceSetting, CancellationToken cancellationToken = default);
 
 
     //IAsyncEnumerable<TextStreamingResult> RunTextStreamingCompletionAsync(string prompt, AIRequestSettings requestSettings, CancellationToken cancellationToken = default);
