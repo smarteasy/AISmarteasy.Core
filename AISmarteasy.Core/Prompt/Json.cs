@@ -2,13 +2,13 @@
 
 namespace AISmarteasy.Core;
 
-internal static class Json
+public static class Json
 {
-    internal static string Serialize(object? o) => JsonSerializer.Serialize(o, Options);
+    public static string Serialize(object? o) => JsonSerializer.Serialize(o, Options);
 
-    internal static T? Deserialize<T>(string json) => JsonSerializer.Deserialize<T>(json, Options);
+    public static T? Deserialize<T>(string json) => JsonSerializer.Deserialize<T>(json, Options);
 
-    internal static string ToJson(this object o) => JsonSerializer.Serialize(o, Options);
+    public static string ToJson(this object o) => JsonSerializer.Serialize(o, Options);
 
     private static readonly JsonSerializerOptions Options = CreateOptions();
 

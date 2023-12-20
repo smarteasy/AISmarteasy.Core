@@ -5,9 +5,9 @@ public interface IBlock
     BlockTypeKind Type { get; }
     string Content { get; }
 
-    string Render(ContextVariableDictionary? variables);
+    string Render(VariableDictionary? variables);
 
-    Task<string> RenderAsync(ContextVariableDictionary variables, bool isNeedFunctionRun, CancellationToken cancellationToken = default);
+    Task<string> RenderAsync(IAIServiceConnector serviceConnector, VariableDictionary variables, bool isNeedFunctionRun, CancellationToken cancellationToken = default);
     
     bool IsValid(out string errorMsg);
 }

@@ -5,16 +5,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace AISmarteasy.Core;
 
-public sealed class ContextVariableDictionary : IDictionary<string, string>
+public sealed class VariableDictionary : IDictionary<string, string>
 {
-    public ContextVariableDictionary(string? value = null)
+    public VariableDictionary(string? value = null)
     {
         _variables[MAIN_KEY] = value ?? string.Empty;
     }
 
-    public ContextVariableDictionary Clone()
+    public VariableDictionary Clone()
     {
-        var clone = new ContextVariableDictionary();
+        var clone = new VariableDictionary();
         foreach (KeyValuePair<string, string> x in _variables)
         {
             clone.Set(x.Key, x.Value);
@@ -25,13 +25,13 @@ public sealed class ContextVariableDictionary : IDictionary<string, string>
 
     public string Input => _variables.TryGetValue(MAIN_KEY, out string? value) ? value : string.Empty;
 
-    public ContextVariableDictionary Update(string? value)
+    public VariableDictionary Update(string? value)
     {
         _variables[MAIN_KEY] = value ?? string.Empty;
         return this;
     }
 
-    public ContextVariableDictionary Update(ContextVariableDictionary newData, bool merge = true)
+    public VariableDictionary Update(VariableDictionary newData, bool merge = true)
     {
         if (ReferenceEquals(this, newData)) return this;
 
@@ -115,9 +115,9 @@ public sealed class ContextVariableDictionary : IDictionary<string, string>
 
     private sealed class TypeProxy
     {
-        private readonly ContextVariableDictionary _variables;
+        private readonly VariableDictionary _variables;
 
-        public TypeProxy(ContextVariableDictionary variables) => _variables = variables;
+        public TypeProxy(VariableDictionary variables) => _variables = variables;
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         public KeyValuePair<string, string>[] Items => _variables._variables.ToArray();
