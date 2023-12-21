@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace AISmarteasy.Core;
 
-public static class LoggerFactoryProvider
+public static class LoggerProvider
 {
-    public static ILoggerFactory Default => NullLoggerFactory.Instance;
+    public static ILogger Default => NullLogger.Instance;
 }

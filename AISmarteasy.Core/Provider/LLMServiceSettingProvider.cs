@@ -1,7 +1,7 @@
 ﻿namespace AISmarteasy.Core;
 
 
-public static class LLMRequestSettingProvider
+public static class LLMServiceSettingProvider
 {
     public static LLMServiceSetting Provide(LLMRequestLevelKind requestType = LLMRequestLevelKind.Lower)
     {

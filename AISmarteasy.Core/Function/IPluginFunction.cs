@@ -6,4 +6,5 @@ public interface IPluginFunction
     string PluginName { get; }
 
     Task<ChatHistory> RunAsync(IAIServiceConnector serviceConnector, LLMServiceSetting serviceSetting, CancellationToken cancellationToken = default);
+    public abstract Task Run();
 }
