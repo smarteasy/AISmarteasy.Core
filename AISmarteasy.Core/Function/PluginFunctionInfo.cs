@@ -7,14 +7,26 @@ public sealed record PluginFunctionInfo(string PluginName, string Name,
 
     public string ToManualString()
     {
+        if(IsSemantic)
+            return ToSemanticFunctionManualString();
+
+        return ToNativeFunctionManualString();
+    }
+
+    private string ToSemanticFunctionManualString()
+    {
+        return $"description: {Description}";
+    }
+
+    private string ToNativeFunctionManualString()
+    {
         var inputs = string.Join("\n", Parameters.Select(parameter =>
         {
             var defaultValueString = string.IsNullOrEmpty(parameter.DefaultValue) ? string.Empty : $" (default value: {parameter.DefaultValue})";
             return $"  - {parameter.Name}: {parameter.Description}{defaultValueString}";
         }));
 
-        return $@"{ToFullyQualifiedName()}:
-  description: {Description}
+        return $@"description: {Description}
   inputs:
   {inputs}";
     }
