@@ -6,4 +6,5 @@ public interface IPluginStore
 
     IPluginFunction? FindFunction(string pluginName, string functionName);
     IPlugin? FindPlugin(string pluginName);
+    void RegisterPluginFunction(IPluginFunction function);
 }

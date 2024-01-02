@@ -25,6 +25,7 @@ public class ChatHistory : List<ChatMessageBase>
     public void AddUserMessage(string message)
     {
         AddMessage(AuthorRole.User, message);
+        LastContent = message;
     }
     public void AddAssistantMessage(string message)
     {
@@ -33,10 +34,12 @@ public class ChatHistory : List<ChatMessageBase>
     }
 
     public string LastContent { get; set; } = string.Empty;
+    public string PipelineLastContent { get; set; } = string.Empty;
 
     public void AddSystemMessage(string message)
     {
         AddMessage(AuthorRole.System, message);
+        LastContent = message;
     }
 
     public int GetTokenCount(string? additionalMessage = null, int skipStart = 0, int skipCount = 0, TextChunker.TokenCounter? tokenCounter = null)

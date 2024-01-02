@@ -7,9 +7,12 @@ namespace AISmarteasy.Core;
 
 public sealed class VariableDictionary : IDictionary<string, string>
 {
+    public string Input => _variables.TryGetValue(INPUT, out string? value) ? value : string.Empty;
+    public string Context => _variables.TryGetValue(CONTEXT, out string? value) ? value : string.Empty;
+
     public VariableDictionary(string? value = null)
     {
-        _variables[MAIN_KEY] = value ?? string.Empty;
+        _variables[INPUT] = value ?? string.Empty;
     }
 
     public VariableDictionary Clone()
@@ -23,11 +26,15 @@ public sealed class VariableDictionary : IDictionary<string, string>
         return clone;
     }
 
-    public string Input => _variables.TryGetValue(MAIN_KEY, out string? value) ? value : string.Empty;
-
-    public VariableDictionary Update(string? value)
+    public VariableDictionary UpdateInput(string value)
     {
-        _variables[MAIN_KEY] = value ?? string.Empty;
+        _variables[INPUT] = value;
+        return this;
+    }
+
+    public VariableDictionary UpdateContext(string value)
+    {
+        _variables[CONTEXT] = value;
         return this;
     }
 
@@ -103,11 +110,12 @@ public sealed class VariableDictionary : IDictionary<string, string>
         set => ((IDictionary<string, string>)_variables)[key] = value;
     }
 
-    internal const string MAIN_KEY = "INPUT";
+    internal const string INPUT = "input";
+    internal const string CONTEXT = "context";
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     internal string DebuggerDisplay =>
-        TryGetValue(MAIN_KEY, out string? input) && !string.IsNullOrEmpty(input)
+        TryGetValue(INPUT, out string? input) && !string.IsNullOrEmpty(input)
             ? $"Variables = {_variables.Count}, Input = {input}"
             : $"Variables = {_variables.Count}";
 

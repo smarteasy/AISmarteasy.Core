@@ -3,7 +3,7 @@
 public sealed record PluginFunctionInfo(string PluginName, string Name, 
     string Description = "", bool IsSemantic = false, IList<ParameterInfo>? Parameters = null)
 {
-    public IList<ParameterInfo> Parameters { get; init; } = Parameters ?? Array.Empty<ParameterInfo>();
+    public IList<ParameterInfo> Parameters { get; } = Parameters ?? Array.Empty<ParameterInfo>();
 
     public string ToManualString()
     {
