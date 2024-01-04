@@ -2,7 +2,7 @@
 
 namespace AISmarteasy.Core;
 
-public class LLMWorkEnv(LLMVendorTypeKind vendor, string serviceAPIKey, LLMWorkTypeKind workType, ILogger logger)
+public class LLMWorkEnv(LLMVendorTypeKind vendor, AIServiceTypeKind aiServiceType, string serviceAPIKey, LLMWorkTypeKind workType, ILogger logger)
 {
     public static IWorkerContext WorkerContext { get; set; }
     public static IPluginStore? PluginStore { get; set; }
@@ -17,4 +17,5 @@ public class LLMWorkEnv(LLMVendorTypeKind vendor, string serviceAPIKey, LLMWorkT
     public LLMWorkTypeKind WorkType { get; set; } = workType;
 
     public ILogger Logger { get; set; } = logger;
+    public AIServiceTypeKind AIServiceType { get; set; } = aiServiceType;
 }
