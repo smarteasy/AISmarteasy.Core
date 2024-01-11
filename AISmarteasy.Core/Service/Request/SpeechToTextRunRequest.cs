@@ -1,7 +1,13 @@
-﻿namespace AISmarteasy.Core;
+﻿using System;
 
-public readonly struct SpeechToTextRunRequest(List<string> audioFilePaths, string language = "en")
+namespace AISmarteasy.Core;
+
+public readonly struct SpeechToTextRunRequest(SpeechSourceTypeKind speechSourceType , string language, byte[] speechData,
+    List<string>? speechFilePaths = default, TranscriptionFormatKind transcriptionFormat = TranscriptionFormatKind.SingleTextJson)
 {
-    public List<string> AudioFilePaths { get; } = audioFilePaths;
+    public List<string>? SpeechFilePaths { get; } = speechFilePaths;
     public string Language { get; } = language;
+    public TranscriptionFormatKind TranscriptionFormat => transcriptionFormat;
+    public SpeechSourceTypeKind SpeechSourceType => speechSourceType;
+    public byte[] SpeechData { get; } = speechData;
 }

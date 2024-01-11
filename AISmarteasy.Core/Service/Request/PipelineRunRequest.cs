@@ -31,6 +31,4 @@ public readonly struct PluginFunctionName
         PluginName = pluginName;
         FunctionName = functionName;
     }
-
-
 }

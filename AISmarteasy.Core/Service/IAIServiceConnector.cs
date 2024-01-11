@@ -7,7 +7,9 @@ public interface IAIServiceConnector
 
     Task<string> GenerateImageAsync(ImageGenerationRequest request, CancellationToken cancellationToken = default);
 
-    Task<ChatHistory> TextCompletionAsync(ChatHistory chatHistory, LLMServiceSetting requestSetting, CancellationToken cancellationToken = default);
-    IAsyncEnumerable<ChatStreamingResult> TextCompletionStreamingAsync(ChatHistory chatHistory, LLMServiceSetting requestSetting, CancellationToken cancellationToken = default);
-    Task<string> RunSpeechToTextAsync(SpeechToTextRunRequest request);
+    Task<string> RunSpeechToTextAsync(SpeechToTextRunRequest request, CancellationToken cancellationToken = default);
+
+    Task<ChatHistory> RunTextCompletionAsync(ChatHistory chatHistory, LLMServiceSetting requestSetting, CancellationToken cancellationToken = default);
+
+    IAsyncEnumerable<ChatStreamingResult> RunTextCompletionStreamingAsync(ChatHistory chatHistory, LLMServiceSetting requestSetting, CancellationToken cancellationToken = default);
 }
