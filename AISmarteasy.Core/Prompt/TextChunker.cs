@@ -14,7 +14,6 @@ public static class TextChunker
     public static List<string> SplitPlainTextLines(string text, int maxTokensPerLine, TokenCounter? tokenCounter = null)
     {
         tokenCounter ??= DefaultTokenCounter;
-
         return InternalSplitLines(text, maxTokensPerLine, trim: true, PlaintextSplitOptions, tokenCounter);
     }
 
@@ -65,14 +64,13 @@ public static class TextChunker
 
         IEnumerable<string> truncatedLines = lines.SelectMany(line => longLinesSplitter(line, adjustedMaxTokensPerParagraph));
 
-        var paragraphs = BuildParagraph(truncatedLines, adjustedMaxTokensPerParagraph, longLinesSplitter, tokenCounter);
+        var paragraphs = BuildParagraph(truncatedLines, adjustedMaxTokensPerParagraph, tokenCounter);
         var processedParagraphs = ProcessParagraphs(paragraphs, adjustedMaxTokensPerParagraph, overlapTokens, chunkHeader, longLinesSplitter, tokenCounter);
 
         return processedParagraphs;
     }
 
-    private static List<string> BuildParagraph(IEnumerable<string> truncatedLines, int maxTokensPerParagraph,
-        Func<string, int, List<string>> longLinesSplitter, TokenCounter tokenCounter)
+    private static List<string> BuildParagraph(IEnumerable<string> truncatedLines, int maxTokensPerParagraph, TokenCounter tokenCounter)
     {
         StringBuilder paragraphBuilder = new();
         List<string> paragraphs = new();
@@ -167,10 +165,10 @@ public static class TextChunker
 
         text = text.NormalizeLineEndings();
         result.Add(text);
-        for (int i = 0; i < splitOptions.Length; i++)
+        foreach (var splitOption in splitOptions)
         {
             int count = result.Count;
-            var (splits2, inputWasSplit2) = Split(result, maxTokensPerLine, splitOptions[i].AsSpan(), trim, tokenCounter);
+            var (splits2, inputWasSplit2) = Split(result, maxTokensPerLine, splitOption.AsSpan(), trim, tokenCounter);
             result.AddRange(splits2);
             result.RemoveRange(0, count);
             if (!inputWasSplit2)

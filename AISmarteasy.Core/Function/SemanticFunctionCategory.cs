@@ -2,7 +2,7 @@
 
 namespace AISmarteasy.Core;
 
-public class SemanticFunctionCategory(string fullyQualifiedName, string name, string content, ILogger logger)
+public class SemanticFunctionCategory(string fullyQualifiedName, string name, string content)
 {
     public string FullyQualifiedName { get; init; } = fullyQualifiedName;
     public string Name { get; init; } = name;

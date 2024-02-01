@@ -4,5 +4,5 @@ public interface IChatResult
 {
     ModelResult ModelResult { get; }
 
-    Task<ChatMessageBase> GetChatMessageAsync(CancellationToken cancellationToken = default);
+    Task<ChatMessageContent> GetChatMessageAsync(CancellationToken cancellationToken = default);
 }

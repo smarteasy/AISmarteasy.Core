@@ -1,6 +1,6 @@
 ﻿namespace AISmarteasy.Core;
 
-public enum LLMVendorTypeKind
+public enum AIServiceVendorKind
 {
     OpenAI
 }

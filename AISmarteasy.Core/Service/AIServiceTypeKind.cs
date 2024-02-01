@@ -2,10 +2,15 @@ namespace AISmarteasy.Core;
 
 public enum AIServiceTypeKind
 {
+    Embedding,
+
     TextCompletion,
+    
     SpeechToText,
     TextToSpeechSpeed,
     TextToSpeechQuality,
-    EmbeddingGeneration,
-    ImageGeneration
+
+    ImageGeneration,
+
+    Vision
 }

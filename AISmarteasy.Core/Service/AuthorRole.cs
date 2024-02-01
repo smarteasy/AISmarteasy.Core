@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace AISmarteasy.Core;
 
@@ -22,34 +22,19 @@ public readonly struct AuthorRole : IEquatable<AuthorRole>
     }
 
     public static bool operator ==(AuthorRole left, AuthorRole right)
-    {
-        if (Equals(left, right))
-        {
-            return true;
-        }
-
-        if (Equals(left, null) || Equals(right, null))
-        {
-            return false;
-        }
-
-        return left.Equals(right);
-    }
+        => left.Equals(right);
 
     public static bool operator !=(AuthorRole left, AuthorRole right)
         => !(left == right);
 
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
+    public override bool Equals([NotNullWhen(true)] object? obj)
         => obj is AuthorRole otherRole && this == otherRole;
 
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => Label.GetHashCode();
-
     public bool Equals(AuthorRole other)
-        => !Equals(other, null)
-           && string.Equals(Label, other.Label, StringComparison.OrdinalIgnoreCase);
+        => string.Equals(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
 
-    public override string ToString() => Label;
+    public override int GetHashCode()
+        => StringComparer.OrdinalIgnoreCase.GetHashCode(this.Label ?? string.Empty);
+
+    public override string ToString() => this.Label ?? string.Empty;
 }

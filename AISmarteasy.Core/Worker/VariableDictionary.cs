@@ -7,12 +7,13 @@ namespace AISmarteasy.Core;
 
 public sealed class VariableDictionary : IDictionary<string, string>
 {
-    public string Input => _variables.TryGetValue(INPUT, out string? value) ? value : string.Empty;
-    public string Context => _variables.TryGetValue(CONTEXT, out string? value) ? value : string.Empty;
+    public string Input => _variables[INPUT];
+    public string Context => _variables[CONTEXT];
 
     public VariableDictionary(string? value = null)
     {
-        _variables[INPUT] = value ?? string.Empty;
+        _variables[INPUT] = string.Empty;
+        _variables[CONTEXT] = string.Empty;
     }
 
     public VariableDictionary Clone()
@@ -34,7 +35,10 @@ public sealed class VariableDictionary : IDictionary<string, string>
 
     public VariableDictionary UpdateContext(string value)
     {
-        _variables[CONTEXT] = value;
+        if(_variables[CONTEXT] !=string.Empty)
+            value = " " + value;
+
+        _variables[CONTEXT] += value;
         return this;
     }
 

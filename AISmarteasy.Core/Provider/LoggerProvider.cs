@@ -5,13 +5,15 @@ namespace AISmarteasy.Core;
 
 public static class LoggerProvider
 {
-    public static ILogger Provide(LogConditionKind logCondition, Type type)
+    private static ILogger _logger = NullLogger.Instance;
+
+    static void Initialize(LogConditionKind logCondition)
     {
-        return Provide(logCondition);
+        _logger = NullLogger.Instance;
     }
 
-    public static ILogger Provide(LogConditionKind logCondition)
+    public static ILogger Provide()
     {
-        return NullLogger.Instance;
+        return _logger;
     }
 }

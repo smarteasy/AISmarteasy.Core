@@ -10,7 +10,7 @@ public class SpeechRecorder : IWaveProvider, IDisposable
     private readonly BufferedWaveProvider _sourceWaveProvider;
     private bool _isWriterDisposed;
 
-    bool isRecording = true;
+    bool _isRecording = true;
 
     public IAIServiceConnector ServiceConnector { get; }
 
@@ -45,20 +45,20 @@ public class SpeechRecorder : IWaveProvider, IDisposable
         _recorder.StopRecording();
 
         var request = new SpeechToTextRunRequest(SpeechSourceTypeKind.Files, "ko", new byte[]{}, new List<string>(){ "./temp1.mp3" } );
-        await ServiceConnector.RunSpeechToTextAsync(request);
+        //await ServiceConnector.RunSpeechToTextAsync(request);
         //Task.WaitAll();
     }
 
     private void RecorderOnDataAvailable(object? sender, WaveInEventArgs args)
     {
-        if (isRecording)
+        if (_isRecording)
         {
             _sourceWaveProvider.AddSamples(args.Buffer, 0, args.BytesRecorded);
             _writer.Write(args.Buffer, 0, args.BytesRecorded);
             _writer.Flush();
         }
 
-        isRecording = false;
+        _isRecording = false;
     }
 
     private void WaveInRecordingStopped(object? sender, StoppedEventArgs e)

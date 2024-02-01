@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace AISmarteasy.Core;
 
-internal sealed class ReadOnlyMemoryConverter : JsonConverter<ReadOnlyMemory<float>>
+public sealed class ReadOnlyMemoryConverter : JsonConverter<ReadOnlyMemory<float>>
 {
     private static readonly JsonConverter<float[]> ArrayConverter = (JsonConverter<float[]>)new JsonSerializerOptions().GetConverter(typeof(float[]));
 

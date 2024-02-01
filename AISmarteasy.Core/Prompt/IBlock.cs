@@ -7,7 +7,7 @@ public interface IBlock
 
     string Render(VariableDictionary? variables);
 
-    Task<string> RenderAsync(IAIServiceConnector serviceConnector, VariableDictionary variables, bool isNeedFunctionRun, CancellationToken cancellationToken = default);
+    Task<string> RenderAsync(ITextCompletionConnector serviceConnector, VariableDictionary variables, bool isNeedFunctionRun, CancellationToken cancellationToken = default);
     
     bool IsValid(out string errorMsg);
 }
